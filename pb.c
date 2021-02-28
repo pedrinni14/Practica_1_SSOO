@@ -31,21 +31,21 @@ char* leerFichero(){
 void copiarTipoEx(char tipo , char* DNI){
 
     if (tipo=='A'){
-        char command[80]="cp ./MODELOSEXAMEN/MODELOA.pdf ";
+        char command[80]="cp ./MODELOSEXAMEN/MODELOA.pdf estudiantes/";
         strcat(command, DNI);
         printf("%s\n", command);
         system(command);
 
     }
     if (tipo=='B'){
-        char command[80]="cp ./MODELOSEXAMEN/MODELOB.pdf ";
+        char command[80]="cp ./MODELOSEXAMEN/MODELOB.pdf estudiantes/";
         strcat(command, DNI);
         printf("%s\n", command);
         system(command);
 
     }
     if (tipo=='C'){
-        char command[80]="cp ./MODELOSEXAMEN/MODELOC.pdf ";
+        char command[80]="cp ./MODELOSEXAMEN/MODELOC.pdf estudiantes/";
         strcat(command, DNI);
         printf("%s\n", command);
         system(command);

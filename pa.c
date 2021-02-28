@@ -35,8 +35,10 @@ char* ObtenerDNI(char* cadena){
 
 }
 void  CrearDirectorio(char* DNI){
-    char command[80]="mkdir ";
+    char command[80]="mkdir estudiantes/";
     strcat(command, DNI);
     printf("%s\n", command);
+    system("mkdir estudiantes");
     system(command);
+    
 }

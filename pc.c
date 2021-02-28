@@ -55,7 +55,7 @@ void EscribirMedia(char* DNI, char* nota){
     char mensaje[100]= "La nota que debes obtener en este nuevo examen para superar la prueba es ";
     int numero = atoi(nota);
     int media = 10-numero;
-    char ruta[100]="./";
+    char ruta[100]="./estudiantes/";
     char text[10];
     char* fichero = "/nota_necesaria.txt";
     sprintf(text,"%d",media);
