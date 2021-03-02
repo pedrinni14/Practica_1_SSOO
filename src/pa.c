@@ -4,13 +4,14 @@
 
 
 char* leerFichero();
-char* ObtenerDNI(char* cadena);
-void CrearDirectorio(char* DNI);
+char* obtenerDNI(char* cadena);
+void crearDirectorio(char* DNI);
 
 
 int main(){
 
-    printf(leerFichero());
+    leerFichero();
+    return 0;
     
 }
 
@@ -22,22 +23,22 @@ char* leerFichero(){
 
     while(fgets(linea, 1024, (FILE*) fich)){
 
-        DNI= ObtenerDNI(linea);
-        CrearDirectorio(DNI);
+        DNI= obtenerDNI(linea);
+        crearDirectorio(DNI);
     }
     return "FIN";
 }
 
-char* ObtenerDNI(char* cadena){
+char* obtenerDNI(char* cadena){
     char delimitador[] = " ";
     char *token = strtok(cadena, delimitador);
     return token;
 
 }
-void  CrearDirectorio(char* DNI){
+void  crearDirectorio(char* DNI){
     char command[80]="mkdir estudiantes/";
     strcat(command, DNI);
-    printf("%s\n", command);
+    //printf("%s\n", command);
     system("mkdir estudiantes");
     system(command);
     

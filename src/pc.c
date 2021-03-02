@@ -1,22 +1,26 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
 
 
 
 char* leerFichero();
-char* ObtenerDNI(char* cadena);
-void CrearFichero(char* DNI);
-void EscribirMedia(char* DNI, char* nota);
+char* obtenerDNI(char* cadena);
+void escribirMedia(char* DNI, char* nota);
 float calcularMediaTotal();
-void EscribirFichero(char* ruta, char* mensaje);
+void escribirFichero(char* ruta, char* mensaje);
 
 
-int main(){
-
-    printf(leerFichero());
+int main(int argc, char *argv[]){
+    char media_cadena[32];
+    char* fin;
+    leerFichero();
     float media = calcularMediaTotal();
-    printf("%f ",media);
+    sprintf(media_cadena,"%.2f", media);
+    write(atoi(argv[0]), media_cadena, strlen(media_cadena)+1);
+
+    return 0;
     
 }
 
@@ -28,29 +32,21 @@ char* leerFichero(){
 
     while(fgets(linea, 1024, (FILE*) fich)){
 
-        DNI= ObtenerDNI(linea);
-        CrearFichero(DNI);
-        EscribirMedia(DNI,(linea+10));
+        DNI= obtenerDNI(linea);
+        escribirMedia(DNI,(linea+10));
     }
     fclose(fich);
     return "FIN \n ";
 
 }
 
-char* ObtenerDNI(char* cadena){
+char* obtenerDNI(char* cadena){
     char delimitador[] = " ";
     char *token = strtok(cadena, delimitador);
     return token;
 
 }
-void  CrearFichero(char* DNI){
-    char command[80]="touch ./";
-    strcat(command, DNI);
-    strcat(command, "/nota_necesaria.txt");
-    //printf("%s\n", command);
-    system(command);
-}
-void EscribirMedia(char* DNI, char* nota){
+void escribirMedia(char* DNI, char* nota){
 
     char mensaje[100]= "La nota que debes obtener en este nuevo examen para superar la prueba es ";
     int numero = atoi(nota);
@@ -62,7 +58,7 @@ void EscribirMedia(char* DNI, char* nota){
     strcat(mensaje,text);
     strcat(ruta,DNI);
     strcat(ruta,fichero);
-    EscribirFichero(ruta,mensaje);
+    escribirFichero(ruta,mensaje);
     printf("%s\n", ruta);
 }
 float calcularMediaTotal(){
@@ -78,7 +74,7 @@ float calcularMediaTotal(){
     return (suma/15);
 
 }
-void EscribirFichero(char* ruta, char mensaje[100]){
+void escribirFichero(char* ruta, char mensaje[100]){
     FILE *fich;
     fich = fopen(ruta, "w");
     
