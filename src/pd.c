@@ -5,7 +5,7 @@
 
 int main(){
 
-    printf("Salida forzada, Archivos Eliminados.")
+    printf("Salida forzada, Archivos Eliminados.");
     system("rm -R estudiantes");
 
     return 0;

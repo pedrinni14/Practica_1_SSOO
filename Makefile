@@ -3,32 +3,28 @@ DIREXE := exec/
 DIRHEA := include/
 DIRSRC := src/
 
-CFLAGS := -I$(DIRHEA) -c -Wall -ansi
-LDLIBS := -lpthread -lrt
 CC := gcc
 
-all : dirs manager pa pb
+all : manager pa pb pc pd demonio 
 
-dirs:
-	mkdir -p $(DIROBJ) $(DIREXE)
+manager: 
+	gcc ./src/manager.c -o ./exec/manager 
 
-manager: $(DIROBJ)manager.o 
-	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+pa: 
+	gcc ./src/pa.c -o ./exec/pa
 
-pa: $(DIROBJ)pa.o 
-	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+pb: 
+	gcc ./src/pb.c -o ./exec/pb
+pc:
+	gcc ./src/pc.c -o ./exec/pc
+pd:
+	gcc ./src/pd.c -o ./exec/pd
+demonio:
+	gcc ./src/demonio.c -o ./exec/demonio
+test: 
+	./exec/manager
 
-pb: $(DIROBJ)pb.o 
-	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+clean:
+	rm -R estudiantes
+	rm -R estudiantes_copia_seguridad
 
-$(DIROBJ)%.o: $(DIRSRC)%.c
-	$(CC) $(CFLAGS) $^ -o $@
-
-test:
-	./$(DIREXE)manager 3 2 5
-
-solution:
-	./$(DIREXE)manager 2 3 4
-
-clean : 
-	rm -rf *~ core $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~

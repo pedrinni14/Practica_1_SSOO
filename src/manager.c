@@ -10,29 +10,28 @@
 #define LECTURA 0 
 
 void manejador(int sig);
-
+void escribirLog(char* texto);
 
 int main(){
     char *const parmList[] = {NULL, NULL, NULL};
     char *const envParms[] = {NULL};
 
 
-    pid_t pid_a,pid_b,pid_c, pid;
+    pid_t pid_a,pid_b,pid_c;
     int status_a,status_b,status_c;
     int tuberia[2];
     char wr_tuberia[256];
     char buffer[32];
-    FILE *fich;
-    fich = fopen("log.txt", "w");
-    
+    FILE* fich;
+    escribirLog("*** LOG DEL SISTEMA ****\n");
 
     pipe(tuberia);
     signal(SIGINT, &manejador);
     sprintf(wr_tuberia, "%d", tuberia[ESCRITURA]);
+    system("./exec/demonio &");
     if((pid_a = fork())== 0){
-        // Aqui va el codigo relacionado con el codigo pa 
+        // Codigo proceso PA
 
-        printf("Funciona la creación de A \n");
         if(execve("./exec/pa", parmList, envParms)== -1){
             perror("Error en la ejecución");
             exit(1);
@@ -46,15 +45,9 @@ int main(){
     else {
 
         waitpid(pid_a,&status_a,0);
-        fprintf(fich, "Creación directorios finalizada\n");
-        
-
-        
 
         if (pid_b = fork()== 0){
             //Codigo del proceso PB
-            sleep(3);
-            printf("Funciona la creación del Proceso B \n");
             if(execve("./exec/pb", parmList, envParms)== -1){
             perror("Error en la ejecución");
             exit(1);
@@ -65,7 +58,6 @@ int main(){
 
         }else if(pid_c = fork()== 0){
             //Codigo del proceso PC
-            printf("Funciona la creación del Proceso C\n");
             if(execl("./exec/pc", wr_tuberia , NULL)== -1){
             perror("Error en la ejecución");
             exit(1);
@@ -77,15 +69,11 @@ int main(){
         else{
             //Codigo del padre
             wait(&status_b);
-            fprintf(fich, "Copia de modelos de examen,finalizada\n");
             wait(&status_c);
             read(tuberia[LECTURA],buffer, sizeof(buffer));
-            printf("%s",buffer);
-            fprintf(fich, "Creación de archivos con nota necesaria para alcanzar la nota de corte, finalizada\n");
-            fprintf(fich, "La nota media de la clase es: ");
-            fprintf(fich, buffer);
-            fprintf(fich,"\nFIN DE PROGRAMA");
-            fclose(fich);
+            escribirLog("La nota media de la clase es: ");
+            escribirLog(buffer);
+            escribirLog("\nFIN DEL PROGRAMA\n");
         }
         
 
@@ -101,7 +89,6 @@ void manejador(int sig){
     int pid_d;
     int status_d;
     FILE *fich;
-    fich = fopen("log.txt", "w");
     
 
     if((pid_d=fork())==0){
@@ -113,8 +100,20 @@ void manejador(int sig){
     
 
     }else{
-        fprintf(fich, "Interrupción ejecutada a proposito\n");
+        fich = fopen("log.txt", "a");
+        escribirLog("Interrupción ejecutada a proposito \n");
         wait(&status_d);
-        exit(1);
+        exit(0);
     }
 }
+
+void escribirLog(char* texto){
+    FILE *fich;
+    if((fich = fopen("log.txt", "a"))== NULL){
+        perror("Error al leer fichero log");
+    }
+    fputs(texto,fich);
+    fclose(fich);
+
+}
+
