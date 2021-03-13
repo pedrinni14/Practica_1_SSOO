@@ -1,3 +1,13 @@
+/******************************************************
+ * Project:         Práctica 1 de Sistemas Operativos II
+ * 
+ * Program name:    pa.c
+ * 
+ * Author:          Pedro Millán Alvarez
+ *
+ * Purpose:         Lee del fichero estudiantes.txt el modelo de examen de cada estudiante realizado y hace una copia del mismo en su directorio correspondiente
+ * 
+ ******************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -14,9 +24,9 @@ void manejador(int sig);
 int main(){
 
     signal(SIGINT, &manejador);
+    sleep(4);
     leerFichero();
     escribirLog("Copia de modelos de examen,finalizada\n");
-    sleep(4);
     return 0;
 
 }

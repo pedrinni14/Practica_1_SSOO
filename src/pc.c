@@ -1,3 +1,14 @@
+/******************************************************
+ * Project:         Práctica 1 de Sistemas Operativos II
+ * 
+ * Program name:    pc.c
+ * 
+ * Author:          Pedro Millán Alvarez
+ *
+ * Purpose:         Calcula la nota media total de la clase, se la pasa al manager mediante una tubería y además escribe en un fichero txt en cada directorio de cada estudiante
+ *                  la nota necesaria en el siguiente examen para aprobar la asignatura
+ * 
+ ******************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

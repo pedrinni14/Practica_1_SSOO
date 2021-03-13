@@ -1,3 +1,13 @@
+/******************************************************
+ * Project:         Práctica 1 de Sistemas Operativos II
+ * 
+ * Program name:    pa.c
+ * 
+ * Author:          Pedro Millán Alvarez
+ *
+ * Purpose:         Creación de los directorios para cada estudiante, el nombre de cada directorio es el DNI de cada estudiante proporcionado por el fichero estudiantes.txt
+ * 
+ ******************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

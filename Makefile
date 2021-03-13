@@ -25,6 +25,6 @@ test:
 	./exec/manager
 
 clean:
-	rm -R estudiantes
 	rm -R estudiantes_copia_seguridad
+	rm -R estudiantes
 

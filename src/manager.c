@@ -1,3 +1,13 @@
+/******************************************************
+ * Project:         Práctica 1 de Sistemas Operativos II
+ * 
+ * Program name:    manager.c
+ * 
+ * Author:          Pedro Millán Alvarez
+ *
+ * Purpose:         Creación y gestión de los procesos pa , pb , pc , pd , manejo de la señal y la ejecución del demonio 
+ * 
+ ******************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
