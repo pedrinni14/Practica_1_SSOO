@@ -1,0 +1,12 @@
+Práctica 1 - Sistemas Operativos 2 
+
+El programa consta de un proceso principal manager encargado de crear y coordinar al resto de procesos.
+Estos procesos leerán la información de el fichero estudiantes.txt para realizar sus objetivos explicados en la parte superior del código de cada proceso.
+
+Para la ejecución de la prática ejecutaremos los siguientes comandos :
+
+- make Makefile all (para generar los ejecutables)
+
+- make Makefile test (para realizar la ejecución del programa)
+
+Autor : Pedro Millán Álvarez
