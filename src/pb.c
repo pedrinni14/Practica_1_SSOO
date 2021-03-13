@@ -1,7 +1,7 @@
 /******************************************************
  * Project:         Práctica 1 de Sistemas Operativos II
  * 
- * Program name:    pa.c
+ * Program name:    pb.c
  * 
  * Author:          Pedro Millán Alvarez
  *
